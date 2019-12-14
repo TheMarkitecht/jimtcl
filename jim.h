@@ -460,10 +460,13 @@ typedef struct Jim_Var {
 } Jim_Var;
 
 /* The cmd structure. */
-typedef int Jim_CmdProc(struct Jim_Interp *interp, int argc,
-    Jim_Obj *const *argv);
+typedef void *Jim_ClientData;
+/* order of parameters here is consistent with tcl_ProcObjCmd in Tcl 8.6, and with FFIDL API. */
+typedef int Jim_ClientCmdProc(Jim_ClientData clientData, struct Jim_Interp *interp, 
+    int argc, Jim_Obj *const *argv);
+typedef int Jim_CmdProc(struct Jim_Interp *interp, 
+    int argc, Jim_Obj *const *argv);
 typedef void Jim_DelCmdProc(struct Jim_Interp *interp, void *privData);
-
 
 
 /* A command is implemented in C if isproc is 0, otherwise
@@ -795,6 +798,8 @@ JIM_EXPORT Jim_Obj * Jim_ConcatObj (Jim_Interp *interp, int objc,
         Jim_Obj *const *objv);
 JIM_EXPORT Jim_Obj *Jim_ListJoin(Jim_Interp *interp,
         Jim_Obj *listObjPtr, const char *joinStr, int joinStrLen);
+JIM_EXPORT int SetListFromAny(Jim_Interp *interp, struct Jim_Obj *objPtr);
+/* this must be renamed with Jim_ prefix for exposed API functions.  revisit.  */
 
 /* dict object */
 JIM_EXPORT Jim_Obj * Jim_NewDictObj (Jim_Interp *interp,
@@ -876,6 +881,13 @@ JIM_EXPORT int Jim_SetAssocData(Jim_Interp *interp, const char *key,
         Jim_InterpDeleteProc *delProc, void *data);
 JIM_EXPORT int Jim_DeleteAssocData(Jim_Interp *interp, const char *key);
 
+/* hashtable functions */
+/* these must be renamed with Jim_ prefix for exposed API functions.  revisit.  */
+JIM_EXPORT unsigned int JimStringCopyHTHashFunction(const void *key);
+JIM_EXPORT void *JimStringCopyHTDup(void *privdata, const void *key);
+JIM_EXPORT int JimStringCopyHTKeyCompare(void *privdata, const void *key1, const void *key2);
+JIM_EXPORT void JimStringCopyHTKeyDestructor(void *privdata, void *key);
+
 /* Packages C API */
 /* jim-package.c */
 JIM_EXPORT int Jim_PackageProvide (Jim_Interp *interp,
@@ -899,6 +911,10 @@ JIM_EXPORT void Jim_HistoryShow(void);
 JIM_EXPORT int Jim_InitStaticExtensions(Jim_Interp *interp);
 JIM_EXPORT int Jim_StringToWide(const char *str, jim_wide *widePtr, int base);
 JIM_EXPORT int Jim_IsBigEndian(void);
+#ifdef JIM_DEBUG_PANIC
+/* this must be renamed with Jim_ prefix for exposed API functions.  revisit.  */
+JIM_EXPORT void JimPanicDump(int condition, const char *fmt, ...);
+#endif
 
 /**
  * Returns 1 if a signal has been received while

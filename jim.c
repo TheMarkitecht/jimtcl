@@ -112,7 +112,7 @@
 const char *jim_tt_name(int type);
 
 #ifdef JIM_DEBUG_PANIC
-static void JimPanicDump(int fail_condition, const char *fmt, ...);
+void JimPanicDump(int fail_condition, const char *fmt, ...);
 #define JimPanic(X) JimPanicDump X
 #else
 #define JimPanic(X)
@@ -611,7 +611,7 @@ static jim_wide JimPowWide(jim_wide b, jim_wide e)
  * Special functions
  * ---------------------------------------------------------------------------*/
 #ifdef JIM_DEBUG_PANIC
-static void JimPanicDump(int condition, const char *fmt, ...)
+void JimPanicDump(int condition, const char *fmt, ...)
 {
     va_list ap;
 
@@ -1040,22 +1040,22 @@ static Jim_HashEntry *JimInsertHashEntry(Jim_HashTable *ht, const void *key, int
 
 /* ----------------------- StringCopy Hash Table Type ------------------------*/
 
-static unsigned int JimStringCopyHTHashFunction(const void *key)
+unsigned int JimStringCopyHTHashFunction(const void *key)
 {
     return Jim_GenHashFunction(key, strlen(key));
 }
 
-static void *JimStringCopyHTDup(void *privdata, const void *key)
+void *JimStringCopyHTDup(void *privdata, const void *key)
 {
     return Jim_StrDup(key);
 }
 
-static int JimStringCopyHTKeyCompare(void *privdata, const void *key1, const void *key2)
+int JimStringCopyHTKeyCompare(void *privdata, const void *key1, const void *key2)
 {
     return strcmp(key1, key2) == 0;
 }
 
-static void JimStringCopyHTKeyDestructor(void *privdata, void *key)
+void JimStringCopyHTKeyDestructor(void *privdata, void *key)
 {
     Jim_Free(key);
 }
@@ -6196,7 +6196,6 @@ static void ListAppendElement(Jim_Obj *listPtr, Jim_Obj *objPtr);
 static void FreeListInternalRep(Jim_Interp *interp, Jim_Obj *objPtr);
 static void DupListInternalRep(Jim_Interp *interp, Jim_Obj *srcPtr, Jim_Obj *dupPtr);
 static void UpdateStringOfList(struct Jim_Obj *objPtr);
-static int SetListFromAny(Jim_Interp *interp, struct Jim_Obj *objPtr);
 
 /* Note that while the elements of the list may contain references,
  * the list object itself can't. This basically means that the
@@ -6487,7 +6486,7 @@ static void UpdateStringOfList(struct Jim_Obj *objPtr)
     JimMakeListStringRep(objPtr, objPtr->internalRep.listValue.ele, objPtr->internalRep.listValue.len);
 }
 
-static int SetListFromAny(Jim_Interp *interp, struct Jim_Obj *objPtr)
+int SetListFromAny(Jim_Interp *interp, struct Jim_Obj *objPtr)
 {
     struct JimParserCtx parser;
     const char *str;

@@ -28,11 +28,13 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=3
-FILE_NAME_0=400804;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjim.c;0;4
-FILE_NAME_1=23048;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjim.h;0;4
-FILE_NAME_2=212;Tcl;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2F.gdbinit;0;4
-FILE_NAME_3=60;Tcl;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fexamples%2Fdebugscript.tcl;0;4
+current_page=1
+FILE_NAME_0=23083;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjim.c;0;4
+FILE_NAME_1=8297;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjim.h;0;4
+FILE_NAME_2=208;Tcl;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2F.gdbinit;0;4
+FILE_NAME_3=189;Tcl;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fexamples%2Fdebugscript.tcl;0;4
+FILE_NAME_4=4450;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjimsh.c;0;4
+FILE_NAME_5=195;C;0;EUTF-8;0;1;0;%2Fsecure%2FSecureNotes%2FTcl_Evolution%2Fjimsh%2Fjim-interactive.c;0;4
 
 [VTE]
 last_dir=/home
